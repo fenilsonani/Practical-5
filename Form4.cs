@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -213,9 +214,61 @@ namespace Practical_5
 
             con.Open();
 
-            SqlCommand cmd1 = new SqlCommand(
-                "insert into tblAdharcard values(" + textBox1.Text+ ",'" + textBox2.Text + "'," + textBox3.Text + ",'" + textBox4.Text + "','" + comboBox4.Text+"','" + dateTimePicker1.Text +"','"+textBox6.Text+ "','"+textBox7.Text+"'" 
-                "               );
+            SqlCommand com=new SqlCommand("insert into AdharCard values('"+textBox1.Text+"','"+textBox2.Text+"','"+textBox3.Text+"','"+textBox4.Text+"','"+comboBox4.Text+"','"+dateTimePicker1.Text+"','"+textBox6.Text+"','"+textBox7.Text+"','"+textBox8.Text+"','"+comboBox1.Text+"','"+comboBox2.Text+"','"+comboBox3.Text+"','"+textBox11.Text+"','"+textBox12.Text+"','"+textBox5.Text+"');",con);
+            
+            com.ExecuteNonQuery();
+
+            con.Close();
+
+            MessageBox.Show("Data Inserted Successfully");
+                
+         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            con.Close();
+
+            con.Open();
+
+
+
+
+            //query for update
+            SqlCommand com =new SqlCommand("update AdharCard set a_no='"+textBox1.Text+ "',middle_name='"+textBox2.Text+"',first_name='" + textBox3.Text+"',last_name='"+textBox4.Text+ "',gender='" + comboBox4.Text + "',birthdate='"+dateTimePicker1.Text+"',nationality='"+textBox6.Text+"',religious='"+textBox7.Text+"',address='"+textBox8.Text+"',state='"+comboBox1.Text+"',dist='"+comboBox2.Text+"',city='"+comboBox3.Text+"',c_no='"+textBox11.Text+"',i_proof='"+textBox12.Text+"',cat_cat='"+textBox5.Text+"' where a_no='" + textBox1.Text+"'",con);
+            com.ExecuteNonQuery();
+
+            con.Close();
+
+            MessageBox.Show("Data Updated Successfully");
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            con.Close();
+
+            con.Open();
+
+            SqlCommand com=new SqlCommand("delete from AdharCard where a_no='"+textBox1.Text+"'",con);
+            com.ExecuteNonQuery();
+
+            con.Close();
+
+            MessageBox.Show("Data Deleted Successfully");
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            con.Close();
+
+            con.Open();
+
+            SqlCommand com = new SqlCommand("delete from AdharCard where a_no='" + textBox1.Text + "'", con);
+            com.ExecuteNonQuery();
+
+            con.Close();
+
+            MessageBox.Show("Data Deleted Successfully");
         }
     }
 }
